@@ -14,9 +14,15 @@ var defaults = {
   targetAttr: 'i18n-target',
   optionsAttr: 'i18n-options',
   useOptionsAttr: false,
-  parseDefaultValueFromContent: true
+  parseDefaultValueFromContent: true,
+  childrenRegx:regexEscape('$c(')+'(.+?)'+regexEscape(')')
 };
 
+
+function regexEscape(str) {
+  /* eslint no-useless-escape: 0 */
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+}
 function init(i18next, $) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
@@ -42,7 +48,7 @@ function init(i18next, $) {
       if (!options.parseDefaultValueFromContent) return o;
       return _extends({}, o, { defaultValue: val });
     }
-
+    
     if (attr === 'html') {
       ele.html(i18next.t(key, extendDefault(opts, ele.html())));
     } else if (attr === 'text') {
@@ -59,6 +65,20 @@ function init(i18next, $) {
       ele.data(dataAttr, translated);
       // we change into the dom
       ele.attr(attr, translated);
+    }else if(attr === "parent"){
+      var defaultHtml = "<div>"+extendDefault(opts, ele.html()).defaultValue.toString()+"</div>";
+      var translated = i18next.t(key, extendDefault(opts, ele.html()));
+      var match = void 0;
+      
+      var childrenRegexp = new RegExp(options.childrenRegx, 'g');
+      while (match = childrenRegexp.exec(translated)) {
+        var selectAttr = match[1];
+      
+        var value = $("[data-i18n='"+selectAttr+"']").prop("outerHTML");
+        translated = translated.replace(match[0], value);
+
+      }
+      ele.html(translated) 
     } else {
       ele.attr(attr, i18next.t(key, extendDefault(opts, ele.attr(attr))));
     }
