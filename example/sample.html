@@ -1,57 +1,74 @@
 <html>
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.1.0/i18next.min.js" ></script>
-    <script src="../jquery-i18next.js" ></script>
-    <!-- <script src="/jquery-i18next.min.js" ></script> -->
-  </head>
 
-  <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.1.0/i18next.min.js"></script>
+    <script src="../jquery-i18next.js"></script>
+    <!-- <script src="/jquery-i18next.min.js" ></script> -->
+</head>
+
+<body>
 
     <ul class="nav">
-            <!-- 保留子级的标签的嵌套模式-修改自Jquery-i18next -->
-      <li><a href="#" data-i18n="[parent]nav.home"><span style="color:red;" data-i18n="nav.test"></span></a></li>
-      <li><a href="#" data-i18n="nav.page1"></a></li>
-      <li><a href="#" data-i18n="nav.page2"></a></li>
+        <!-- 保留子级的标签的嵌套模式-修改自Jquery-i18next -->
+        <li>
+            <a href="#" data-i18n="nav.home">
+                <span style="color:red;" data-i18n="nav.test">
+                    <label style="color:green;" data-i18n="nav.test2"></label>
+                    <label style="color:black;" data-i18n="nav.test3"></label>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-i18n="nav.page1"></a>
+        </li>
+        <li>
+            <a href="#" data-i18n="nav.page2"></a>
+        </li>
     </ul>
 
     <div class="content">
-      <input data-i18n="[placeholder]input.placeholder; [title]input.placeholder" />
+        <input data-i18n="[placeholder]input.placeholder; [title]input.placeholder" />
     </div>
 
     <script>
-      // use plugins and options as needed, for options, detail see
-      // http://i18next.com/docs/
-      i18next.init({
-        lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
-        resources: { // evtl. load via xhr https://github.com/i18next/i18next-xhr-backend
-          en: {
-            translation: {
-              input: {
-                placeholder: "a placeholder"
-              },
-              nav: {
-                
-                home: 'Ho$c(nav.test)me',//保留子级的标签的嵌套模式-修改自Jquery-i18next
-                page1: 'Page One',
-                page2: 'Page Two',
-                test:'-test-'
-              }
-            }
-          }
-        }
-      }, function(err, t) {
-        // for options see
-        // https://github.com/i18next/jquery-i18next#initialize-the-plugin
-        jqueryI18next.init(i18next, $);
+        $(document).ready(function () {
+            var s = $('<label style="color:green;" data-i18n="nav.test2">123</label>')
 
-        // start localizing, details:
-        // https://github.com/i18next/jquery-i18next#usage-of-selector-function
-        $('[data-i18n]').localize();
-        
-      });
+        })
+        // use plugins and options as needed, for options, detail see
+        // http://i18next.com/docs/
+        i18next.init({
+            lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
+            resources: { // evtl. load via xhr https://github.com/i18next/i18next-xhr-backend
+                en: {
+                    translation: {
+                        input: {
+                            placeholder: "a placeholder"
+                        },
+                        nav: {
+                            home: 'Ho$c(nav.test)me',//保留子级的标签的嵌套模式-修改自Jquery-i18next
+                            page1: 'Page One',
+                            page2: 'Page Two',
+                            test: '-test$c(nav.test2)$c(nav.test3)-',
+                            test2: '12xx3',
+                            test3: '测试3'
+                        }
+                    }
+                }
+            }
+        }, function (err, t) {
+            // for options see
+            // https://github.com/i18next/jquery-i18next#initialize-the-plugin
+            jqueryI18next.init(i18next, $);
+
+            // start localizing, details:
+            // https://github.com/i18next/jquery-i18next#usage-of-selector-function
+            $("[data-i18n]").localize();
+        });
     </script>
 
-  </body>
+</body>
 
 </html>
