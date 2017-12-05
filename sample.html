@@ -14,9 +14,9 @@
         <!-- 保留子级的标签的嵌套模式-修改自Jquery-i18next -->
         <li>
             <a href="#" data-i18n="nav.home">
-                <span style="color:red;" data-i18n="nav.test">
-                    <label style="color:green;" data-i18n="nav.test2"></label>
-                    <label style="color:black;" data-i18n="nav.test3"></label>
+                <span style="color:red;" data-i18n="nav.tip">
+                    <label style="color:green;" data-i18n="nav.test1"></label>
+                    <label style="color:black;" data-i18n="nav.test2"></label>
                 </span>
             </a>
         </li>
@@ -48,12 +48,12 @@
                             placeholder: "a placeholder"
                         },
                         nav: {
-                            home: 'Ho$c(nav.test)me',//保留子级的标签的嵌套模式-修改自Jquery-i18next
+                            home: "Ho$c(nav.tip)me",//保留子级的标签的嵌套模式-修改自Jquery-i18next
+                            tip: "Children$c(nav.test1)Node$c(nav.test2)Tip",
+                            test1: "Test One",
+                            test2: "Test Two",
                             page1: 'Page One',
-                            page2: 'Page Two',
-                            test: '-test$c(nav.test2)$c(nav.test3)-',
-                            test2: '12xx3',
-                            test3: '测试3'
+                            page2: 'Page Two'
                         }
                     }
                 }
