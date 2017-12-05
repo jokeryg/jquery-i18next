@@ -1,15 +1,6 @@
-# Introduction
-
-Source can be loaded via [npm](https://www.npmjs.com/package/jquery-i18next), bower or [downloaded](https://github.com/i18next/jquery-i18next/blob/master/jquery-i18next.min.js) from this repo.
 
 --------------
-**NEWS: localization as a service - locize.com**
-
-Needing a translation management? Want to edit your translations with an InContext Editor? Use the orginal provided to you by the maintainers of i18next!
-
-![locize](https://www.i18next.com/assets/img/locize_recap_big_low.gif)
-
-With using [locize](http://locize.com/?utm_source=jquery_i18next_readme&utm_medium=github) you directly support the future of i18next and react-i18next.
+**修改自Jquery-i18n,原项目地址：<a href='https://github.com/i18next/jquery-i18next'>https://github.com/i18next/jquery-i18next</a>**
 
 --------------
 
