@@ -2,17 +2,44 @@
 --------------
 **修改自Jquery-i18n,原项目地址：<a href='https://github.com/i18next/jquery-i18next'>https://github.com/i18next/jquery-i18next</a>**
 
+增加子级保留标签嵌套模式
+使用方法在父级的翻译资源上填写$c(子级翻译id)
+例子:
+```json
+{
+  "nav": {
+    "home": "Ho$c(nav.tip)me",
+    "tip":"Children$c(nav.test1)Node$c(nav.test2)Tip",
+    "test1":"Test One",
+    "test2":"Test Two",
+    "page1": "Page One",
+    "page2": "Page Two"
+  }
+}
+```
+
+
+```html
+    <ul class="nav">
+        <!-- 保留子级的标签的嵌套模式-修改自Jquery-i18next -->
+        <li>
+            <a href="#" data-i18n="nav.home">
+                <span style="color:red;" data-i18n="nav.tip">
+                    <label style="color:green;" data-i18n="nav.test1"></label>
+                    <label style="color:black;" data-i18n="nav.test2"></label>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-i18n="nav.page1"></a>
+        </li>
+        <li>
+            <a href="#" data-i18n="nav.page2"></a>
+        </li>
+    </ul>
+```
+
 --------------
-
-If you don't use a module loader it will be added to window.jqueryI18next
-
-```
-# npm package
-$ npm install jquery-i18next
-
-# bower
-$ bower install jquery-i18next
-```
 
 Simplifies i18next usage in projects built based on jquery, like:
 
