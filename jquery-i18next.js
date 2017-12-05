@@ -15,20 +15,17 @@ var defaults = {
   optionsAttr: 'i18n-options',
   useOptionsAttr: false,
   parseDefaultValueFromContent: true,
-  childrenRegx:regexEscape('$c(')+'(.+?)'+regexEscape(')')
+  childrenRegx:'\\$c\\((.+?)\\)'//保留子级的标签的嵌套模式-修改自Jquery-i18next
 };
 
 
-function regexEscape(str) {
-  /* eslint no-useless-escape: 0 */
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-}
+
 function init(i18next, $) {
+    
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-
   options = _extends({}, defaults, options);
-
+  
   function parse(ele, key, opts) {
     if (key.length === 0) return;
 
@@ -66,17 +63,15 @@ function init(i18next, $) {
       // we change into the dom
       ele.attr(attr, translated);
     }else if(attr === "parent"){
+      //保留子级的标签的嵌套模式-修改自Jquery-i18next
       var defaultHtml = "<div>"+extendDefault(opts, ele.html()).defaultValue.toString()+"</div>";
       var translated = i18next.t(key, extendDefault(opts, ele.html()));
       var match = void 0;
-      
       var childrenRegexp = new RegExp(options.childrenRegx, 'g');
       while (match = childrenRegexp.exec(translated)) {
         var selectAttr = match[1];
-      
-        var value = $("[data-i18n='"+selectAttr+"']").prop("outerHTML");
+        var value = $(defaultHtml).find("[data-i18n='"+selectAttr+"']").prop("outerHTML");
         translated = translated.replace(match[0], value);
-
       }
       ele.html(translated) 
     } else {

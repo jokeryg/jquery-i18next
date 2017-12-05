@@ -2,14 +2,15 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.1.0/i18next.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js" ></script>
+    <script src="../jquery-i18next.js" ></script>
     <!-- <script src="/jquery-i18next.min.js" ></script> -->
   </head>
 
   <body>
 
     <ul class="nav">
-      <li><a href="#" data-i18n="nav.home"></a></li>
+            <!-- 保留子级的标签的嵌套模式-修改自Jquery-i18next -->
+      <li><a href="#" data-i18n="[parent]nav.home"><span style="color:red;" data-i18n="nav.test"></span></a></li>
       <li><a href="#" data-i18n="nav.page1"></a></li>
       <li><a href="#" data-i18n="nav.page2"></a></li>
     </ul>
@@ -30,9 +31,11 @@
                 placeholder: "a placeholder"
               },
               nav: {
-                home: 'Home',
+                
+                home: 'Ho$c(nav.test)me',//保留子级的标签的嵌套模式-修改自Jquery-i18next
                 page1: 'Page One',
-                page2: 'Page Two'
+                page2: 'Page Two',
+                test:'-test-'
               }
             }
           }
@@ -44,8 +47,8 @@
 
         // start localizing, details:
         // https://github.com/i18next/jquery-i18next#usage-of-selector-function
-        $('.nav').localize();
-        $('.content').localize();
+        $('[data-i18n]').localize();
+        
       });
     </script>
 
