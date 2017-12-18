@@ -13,7 +13,8 @@
     "test1":"Test One",
     "test2":"Test Two",
     "page1": "Page One",
-    "page2": "Page Two"
+    "page2": "Page Two",
+    "empty":"not data"
   }
 }
 ```
@@ -37,6 +38,12 @@
             <a href="#" data-i18n="nav.page2"></a>
         </li>
     </ul>
+
+    <!-- 同一个key重复使用时候增加i18n-repeat="repeat" -->
+    <p data-i18n="nav.empty" i18n-repeat="repeat">
+    </p>
+    <p data-i18n="nav.empty" i18n-repeat="repeat">
+    </p>
 ```
 
 --------------

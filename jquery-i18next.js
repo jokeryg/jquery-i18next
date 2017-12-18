@@ -12,6 +12,7 @@
         i18nName: 'i18n',
         handleName: 'localize',
         selectorAttr: 'data-i18n',
+        repeatAttr:'i18n-repeat',
         targetAttr: 'i18n-target',
         optionsAttr: 'i18n-options',
         useOptionsAttr: false,
@@ -99,8 +100,9 @@
 
             var newEle;
             var key = ele.attr(options.selectorAttr);
+            var isRepeat = ele.attr(options.repeatAttr)
             if (!key && typeof key !== 'undefined' && key !== false) key = ele.text() || ele.val();
-            if (!key || translatedMap[key] != undefined) return;
+            if (!key || (translatedMap[key] != undefined&&isRepeat==undefined)) return;
 
             var target = ele,
                 targetSelector = ele.data(options.targetAttr);
